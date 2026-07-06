@@ -7,7 +7,9 @@ type Props = {
 export default function ArticleHero({ article }: Props) {
   const serverUrl = process.env.NEXT_PUBLIC_SERVER || "https://multiventor-backend.onrender.com";
   const imageUrl = article.featuredImage?.url
-    ? `${serverUrl}${article.featuredImage.url}`
+    ? article.featuredImage.url.startsWith("http")
+      ? article.featuredImage.url
+      : `${serverUrl}${article.featuredImage.url}`
     : "https://images.unsplash.com/photo-1542435503-956c469947f6?auto=format&fit=crop&w=1600&q=80";
 
   return (

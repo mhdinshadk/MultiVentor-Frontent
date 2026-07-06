@@ -22,7 +22,9 @@ export default async function AuthorProfilePage({ params }: Props) {
 
   const serverUrl = process.env.NEXT_PUBLIC_SERVER || "https://multiventor-backend.onrender.com";
   const avatar = author.avatar?.url
-    ? `${serverUrl}${author.avatar.url}`
+    ? author.avatar.url.startsWith("http")
+      ? author.avatar.url
+      : `${serverUrl}${author.avatar.url}`
     : `https://ui-avatars.com/api/?name=${encodeURIComponent(
         author.displayName
       )}&background=8b5cf6&color=fff&size=180`;

@@ -8,11 +8,15 @@ type Props = {
 
 export default function ArticleCard({ article }: Props) {
   const imageUrl = article.featuredImage?.url
-    ? `${process.env.NEXT_PUBLIC_SERVER}${article.featuredImage.url}`
+    ? article.featuredImage.url.startsWith("http")
+      ? article.featuredImage.url
+      : `${process.env.NEXT_PUBLIC_SERVER || ""}${article.featuredImage.url}`
     : "https://images.unsplash.com/photo-1542435503-956c469947f6?auto=format&fit=crop&w=800&q=80";
 
   const authorAvatar = article.author?.avatar?.url
-    ? `${process.env.NEXT_PUBLIC_SERVER}${article.author.avatar.url}`
+    ? article.author.avatar.url.startsWith("http")
+      ? article.author.avatar.url
+      : `${process.env.NEXT_PUBLIC_SERVER || ""}${article.author.avatar.url}`
     : `https://ui-avatars.com/api/?name=${encodeURIComponent(article.author?.displayName || "Author")}&background=8b5cf6&color=fff`;
 
   return (
