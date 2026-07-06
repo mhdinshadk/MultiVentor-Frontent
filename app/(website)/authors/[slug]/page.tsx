@@ -20,7 +20,7 @@ export default async function AuthorProfilePage({ params }: Props) {
   const articlesRes = await getArticlesByAuthor(author.id);
   const authorArticles = articlesRes.docs || [];
 
-  const serverUrl = process.env.NEXT_PUBLIC_SERVER || "http://localhost:3001";
+  const serverUrl = process.env.NEXT_PUBLIC_SERVER || "https://multiventor-backend.onrender.com";
   const avatar = author.avatar?.url
     ? `${serverUrl}${author.avatar.url}`
     : `https://ui-avatars.com/api/?name=${encodeURIComponent(
